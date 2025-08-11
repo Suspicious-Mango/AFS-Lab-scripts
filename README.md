@@ -7,7 +7,7 @@ Below is a list of all scripts in alphabetical order and a brief outline of what
 Deprecated scripts are labeled as such and have ! at the beginning of thier name. They can be deleted without issue if need be
 
 It is HIGHLY RECOMMENDED to have all necessary conda enviornments downloaded prior to usage of any script
-Go to ./nico-conda-envs for the .yml files and use "conda create -f name-of-enviornment.yml" to download
+Go to conda-envs for the .yml files and use "conda create -f name-of-enviornment.yml" in command line to download
 
 1d1-aligner-for-all-subspecies-tree.sh
 
