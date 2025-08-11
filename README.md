@@ -299,7 +299,7 @@ run-mafft-cluster.sh
     - Example usage: conda activate -n mafft_conda scripts/run-mafft-cluster.sh strain-name
     - Outputs: mafft-$name.fa, trimal-$name.fa, $name.phylip, temp-$name.out, $name.phylip_phyml_stats_$name.txt, $name.phylip_phyml_tree_$name.txt, $name-phylip_phyml_tree-list.txt, $name-phylip_phyml_tree-list.txt
                
-#NOTE: the variants of run-mafft-cluster.sh and thier respective submission scripts exist due to troubleshooting reasons. Functionally, they are identical to run-mafft-cluster.sh and submit-job-cclake.sh
+NOTE: the variants of run-mafft-cluster.sh and thier respective submission scripts exist due to troubleshooting reasons. Functionally, they are identical to run-mafft-cluster.sh and submit-job-cclake.sh
 
 run-mafft-ERVB7_LTRs.sh
 
@@ -379,6 +379,7 @@ tree_grower.sh
     - Outputs: $name/LTR_phylogeny_$name.png
     
 trimal_to_heatmap.R
+
     - Synopsis: Better version of mafft_heatmap_readier.R. Converts a trimal output into a matrix with NTs seperated into rows with the tip label as the first column
     - Directory info: uses cwd
     - Example usage: conda activate -n R Rscript path-to-scripts/trimal_to_heatmap.R strain-name
