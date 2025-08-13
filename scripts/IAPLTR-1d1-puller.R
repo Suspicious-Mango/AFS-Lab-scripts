@@ -1,3 +1,4 @@
+#[DEPRECATED]
 suppressMessages(require(data.table))
 suppressMessages(require(tidyverse))
 
