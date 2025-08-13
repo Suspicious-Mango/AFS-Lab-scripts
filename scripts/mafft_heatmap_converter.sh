@@ -1,5 +1,4 @@
-# conda activate R prior to use
-
+#!/bin/bash
 cd ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains
 
 #cycle through strains and run reformatting + NT -> number conversion for heatmap making
