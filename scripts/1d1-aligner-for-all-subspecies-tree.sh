@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains/hybrids
 
 #cats all five files to use for phylogenetic clustering
