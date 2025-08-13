@@ -4,6 +4,7 @@ suppressMessages(require(tidyr))
 suppressMessages(require(tidyverse))
 
 #in-file is a file with the phylogeny ID's in the first column and which catagory it is in for the second column 
+#see 1d1-pop_alpha-barchart.sh for generation
 data <- fread("in-file.txt", header=FALSE, col.names = c("strain", "cat")) %>%
     mutate(strain = substr(strain, 1, 3)) #splicing out the ID number so it is only the strain name
 
