@@ -1,3 +1,4 @@
+#[DEPRECATED]
 #takes blast output file and reformats, checks for nearby LTR1s and returns a 1 if yes, 0 if no
 #passes in strain name and cleans for every reference genome
 cd ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains
