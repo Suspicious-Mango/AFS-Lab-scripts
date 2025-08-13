@@ -1,4 +1,4 @@
-
+#[DEPRECATED]
 #conda activate R
 module load bedtools 
 
