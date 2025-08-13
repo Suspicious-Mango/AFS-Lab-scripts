@@ -3,6 +3,7 @@
 #Loops through all strain directories against refname, which is passed in
 # ! conda activate blast !
 
+#!/bin/bash
 cd ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains
 
 refname=$1 
