@@ -1,3 +1,4 @@
+#[DEPRECATED]
 require(tidyverse)
 require(data.table)
 require(dplyr)
@@ -34,4 +35,4 @@ temp = temp[-cut_vec,] %>% #cut intermediates
   #                               . == '-' ~ 0)))
 
 write.table(temp, file="outfile.txt", quote=FALSE, 
-            row.names=FALSE, col.names=FALSE, sep="\t", na = '-')
+            row.names=FALSE, col.names=FALSE, sep="\t", na = '-') #saving
