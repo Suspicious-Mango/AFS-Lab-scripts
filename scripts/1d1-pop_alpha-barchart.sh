@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ~/rds/rds-afs-lab-rds-FxufPjywHiE/genomes/Mouse-strains/hybrids
 
 #windowed_tiplabs contains the tip labels of the phylogeny and what population it pertains to (in this case, only alpha)
