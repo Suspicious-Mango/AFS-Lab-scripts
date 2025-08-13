@@ -1,7 +1,9 @@
 #Step 1) takes gff3 (liftoff output) and converts into a bed 6
 #Step 2) adds ase info as a 7th column
 
+#!/bin/bash
 cd ~/rds/rds-acf1004-afs-lab-rds/genomes/T2T/chainfiles/mapping-cast-Bl6-transcripts
+
 gff3file=$1
 asefile=$2
 name=`basename $gff3file .gff3`
