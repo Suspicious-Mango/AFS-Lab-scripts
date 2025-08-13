@@ -2,13 +2,14 @@ require(tidyverse)
 require(seqinr)
 require(data.table)
 
+#reads in a bed6
 temp = fread("in-file.txt", fill=TRUE)|>
   na.omit()
-indexes_to_cut = c()
+indexes_to_cut = c() #empty vector to store ID's not associated with full TE's
 
 i = 1
 
-while(i < nrow(temp)-1){
+while(i < nrow(temp)-1){ #loops ID from start to end
   if(isTRUE((identical(temp[i,4],temp[i+1,4])) & #same strand
      (identical(temp[i,6],temp[i+1,6])) & #same ID
      (temp[i,3][1] - temp[i+1,2][1] < 25) & #same strand break within 50bp tol
@@ -25,6 +26,6 @@ while(i < nrow(temp)-1){
 i = i + 1
 }
 
-temp = temp[-indexes_to_cut,]
+temp = temp[-indexes_to_cut,] #removing ID's not associated with full TE's
 write.table(temp, file="outfile.txt", quote=FALSE, 
-            row.names=FALSE, col.names=FALSE, sep="\t")
+            row.names=FALSE, col.names=FALSE, sep="\t") #saving
