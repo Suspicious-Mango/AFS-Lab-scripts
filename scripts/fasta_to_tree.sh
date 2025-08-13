@@ -1,5 +1,7 @@
+#[DEPRECATED]
 ##pass in strain name to cluster + turn into a tree. Assumes you are in the file's directory and outputs to that folder
 #for full pipline, run bed_to_LTR1_fasta.sh first
+#!/bin/bash
 name=$1
 
 ##run sequence alignment first
