@@ -1,3 +1,4 @@
+#[DEPRECATED]
 #Script parses fasta.out files of mice strains in Mouse-strains directory and returns a .txt file
 #containing all combinations of LTR and strain of interest along with the relative solo, full, and 1d1 IAPLTR count
 
