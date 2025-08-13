@@ -25,9 +25,8 @@ rm in-file.txt outfile.txt
 cd ../
 #(fasta_to_tree.sh) run mafft on the LTRs
 
-#sbatch ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains/submit-job-cclake.sh $name #activates mafft_conda also
-
-#runs "bash ./scripts/run-mafft-cluster.sh $1" on server
+#runs "bash ./scripts/run-mafft-cluster.sh $1" on server. activates mafft_conda internally
+#sbatch ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains/submit-job-cclake.sh $name 
 
 #run-mafft-cluster:
     # mafft LTR1s-$name.fa > mafft-$name.fa 
