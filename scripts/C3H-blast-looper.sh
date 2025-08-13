@@ -1,3 +1,4 @@
+#[DEPRECATED]
 #BLASTs 1000bp upstream or downstream of IAPLTR1s, depending on if its on the 3' or 5' end of the internal element
 #Loops through all strain directories against refname, which is passed in
 # ! conda activate blast !
