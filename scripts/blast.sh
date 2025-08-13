@@ -1,4 +1,5 @@
 #!/bin/bash
+#[DEPRECATED]
   
 module load blast
 cd peaks
