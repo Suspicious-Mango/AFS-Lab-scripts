@@ -1,6 +1,7 @@
 #Runs alignment for two genomes via minimap2 and then syri for VCF files (to later become chain files)
 #pass in names of strains to test
-# ! conda activate liftOver !
+
+#!/bin/bash
 cd ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains/
 
 #setting up variables for reference genome (full fasta)
