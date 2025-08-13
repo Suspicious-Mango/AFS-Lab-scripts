@@ -5,9 +5,9 @@ suppressMessages(require(tidyverse))
 IAPLTR_type <- fread("../LTR_to_pull.txt", header = FALSE, stringsAsFactors=FALSE)
 
 iapltr <- fread("in-file.txt", header = FALSE, 
-                stringsAsFactors=FALSE, fill = TRUE) %>%
-  filter(V10 %in% IAPLTR_type$V1 | V10 == "IAPEz-int") %>% 
-  mutate(V9 = ifelse((V9 == "C"), "-", "+"))
+                stringsAsFactors=FALSE, fill = TRUE) %>% #read in fasta.out
+  filter(V10 %in% IAPLTR_type$V1 | V10 == "IAPEz-int") %>%  #pull out only elements of interest
+  mutate(V9 = ifelse((V9 == "C"), "-", "+")) #swap "C" with "-" in strand column
 
 cut.vec <- c()   #stores rows to cut by row index
 
@@ -75,11 +75,13 @@ iapltr.all <- iapltr.all[-cut.vec,] #cutting all irrelevant data and TE intermed
 colnames(iapltr.all) <- c("chr", "start", "stop", "LTR", "ID", "strand")
 #now it is: chrom, start, stop, IAPLTR, solo/full/1d1, strand
 
+#seperate each ID into it's own file
 iapltr.solo <- iapltr.all %>% filter(str_detect(ID, 's_'))
 iapltr.full <- iapltr.all %>% filter(str_detect(ID, 'd1'))
 iapltr.1d1 <- iapltr.all %>% filter(str_detect(ID, 'Id1_'))
 iapltr.non1d1 <- iapltr.all %>% filter(str_detect(ID, 'non1d1_'))
 
+#saving
 write.table(iapltr.all, file="outfile.all.txt", quote=FALSE,
             row.names=FALSE, col.names=FALSE, sep="\t")
 write.table(iapltr.solo, file="outfile.solos.txt", quote=FALSE,
