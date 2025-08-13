@@ -2,15 +2,15 @@ suppressMessages(require(data.table))
 suppressMessages(require(tidyverse))
 suppressMessages(require(tidyr))
 
-name = commandArgs(trailingOnly=TRUE)
+name = commandArgs(trailingOnly=TRUE) #read in strain name for outfile naming
 if (length(name)==0 | length(name)>1) {
   stop("One argument must be supplied (input file).n", call.=FALSE)
 }
 
-trimal <- fread("in-file.txt", header = FALSE, stringsAsFactors=FALSE) %>%
+trimal <- fread("in-file.txt", header = FALSE, stringsAsFactors=FALSE) %>% #read in trimal and generate an empty second column
     mutate(V2 = "")
 
-cut.vec = c()
+cut.vec = c() #empty vector to store indexes to cut later
 
 i = 1
 while (i < nrow(trimal)) { #iterate down rows
@@ -36,4 +36,4 @@ trimal <- trimal[-cut.vec,] %>% #cut rows with redundant sequences
 filename = paste0("msa-", name)
 
 write.table(trimal, file=paste0(filename, ".txt"), quote=FALSE,
-            row.names=FALSE, col.names=FALSE, sep="\t")
+            row.names=FALSE, col.names=FALSE, sep="\t") #saving
