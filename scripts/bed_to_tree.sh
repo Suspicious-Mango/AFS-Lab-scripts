@@ -1,3 +1,4 @@
+#[DEPRECATED]
 #combination of bed_to_LTR1_fasta.sh and fasta_to_tree.sh
 module load bedtools
 
