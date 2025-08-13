@@ -1,3 +1,22 @@
+#Conducts test to whether shared or strain-specific LTR1s in the query genome strain2 (compared to a reference strain1) are near DEGs in strain2
+#Conducts test whether LTR1s flanking variably methylated IAPs (VM-IAPs) in strain2 are near DEGs vs LTR1s not flanking VM-IAPs
+#Steps:
+	#Experimental data
+ 		# 1) Extracting DEGs from ase_bed file (output of gff3_to_bed6plusASE.sh) and condensing to only the first NT, aka the TSS (transcriptional start site)
+   		# 2a) Separating shared vs strain specific LTR1s from liftOver mapping
+	 	# 2b) Pulling overlap of TSS DEGs with shared and strain specific LTR1s in a 1Mb window
+   		# 3a) Pulling for LTR1 and LTR1a (since 1a's may be misannotated) in strain2
+	 	# 3b) Seperating VM and not non-VM if LTRs overlaped with those on VM_IAP list
+   		# 3c) Pulling DEGs in 1Mb window for both VM and non-VM
+	 	# 4) Reformat pulled DEG files form part 2 and 3 into a format to use in chi squared testing
+ 	#Significance testing
+  		# 1) Generate randomized positions for LTRs across strain2 and count if near DEGs
+		# 2) With counts from experimental data step 4, perform chi squared significance test and get p-values
+  		# 3) Loop steps 1 and 2 100 times, appending to the matrix with the p-values each time
+		# 4) Take average of p-values appended in step 3
+
+#!/bin/bash
+
 strain1=$1
 strain2=$2
 path_to_mappings=~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains/liftOver/T2T
@@ -56,7 +75,7 @@ experimental_data
 rm p_val-matrix.txt
 echo -e 'SS\t  Shared\t VM\t non-VM' > p_val-matrix.txt
 
-for i in {1..100}
+for i in {1..100} #Perform test 100 times
 do
 	rm in-matrix.txt
 	echo -e 'SS\t SS-control\t Shared\t Shared-control\t VM\t VM-control\t non-VM\t non-VM-control' > in-matrix.txt
