@@ -1,3 +1,4 @@
+#[DEPRECATED]
 ##Converts a fasta.out into an LTR fasta (made for T2T black6)
 ##conda activate R, module load bedtools
 name=$1
