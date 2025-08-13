@@ -13,6 +13,8 @@
 #! input format: bash liftOver.sh strain1 strain2 !
 module load bedtools
 module load bcftools
+
+#!/bin/bash
 cd ~/rds/rds-acf1004-afs-lab-rds/genomes/Mouse-strains/liftOver/T2T
 
 strain1=$1
