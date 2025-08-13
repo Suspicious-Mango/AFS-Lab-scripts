@@ -1,4 +1,4 @@
-
+#[DEPRECATED]
 #change submit job input to "run-mafft-cluster.sh all-IAP-$1.fa"
 
 module load bedtools
