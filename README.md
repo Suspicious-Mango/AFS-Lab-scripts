@@ -1,5 +1,5 @@
 # AFS-Lab-scripts
-The collection of scripts I've made for the Anne Ferguson-Smith Lab at the University of Cambridge, Genetics Department
+The collection of scripts I've made for the Anne Ferguson-Smith Lab at the University of Cambridge, Genetics Department. Made under the direction of Dr. Kevin Costello.
 
 ----------------------------------------
 
