@@ -14,16 +14,17 @@ name = commandArgs(trailingOnly=TRUE)
 if (length(name)==0 | length(name)>1) {
   stop("One argument must be supplied (input file).n", call.=FALSE)
 }
+
 # Read in the tree, fasta, and Id1 matrix files
-treefile = read.newick("in-tree.txt") 
+treefile = read.newick("in-tree.txt") #phymal_tree
 
-fastafile = fread("in-fasta.txt", header = FALSE, sep="\t", stringsAsFactors = FALSE) %>%
+fastafile = fread("in-fasta.txt", header = FALSE, sep="\t", stringsAsFactors = FALSE) %>% #generated from mafft_heatmap_converter.sh
 	melt(id.vars = "V1") #mutates the data to long format for ggplot geom_tile
-colnames(fastafile) <- c("label", "position", "nt")
-fastafile = fastafile %>% replace_na(list(nt = '-'))
+colnames(fastafile) <- c("label", "position", "nt") #defining column names for ggplot
+fastafile = fastafile %>% replace_na(list(nt = '-')) #replacing NA values with "-"
 
-Id1file = fread("in-Id1_matrix.txt", header = FALSE, sep="\t") %>%
-	filter(V2 == 1)
+Id1file = fread("in-Id1_matrix.txt", header = FALSE, sep="\t") %>% #generated from 1d1-aligner-for-all-subspecies-tree.sh
+	filter(V2 == 1) #only interested in the elements associated with 1d1's
 
 # Convert nucleotide characters to colors for plotting
 NT_colors = c("a" = "chartreuse2", "t" = "coral2", "c" = "deepskyblue1", "g" = "darkgoldenrod2", "-" = "white")
@@ -39,9 +40,9 @@ treeplot = treefile %>% ggtree() +
 					   breaks = c("C57", "JF1", "CAS", "PWK", "SPR"), 
 					   labels = c("domesticus (Bl6)", "molossinus (JF1)", "castaneus (CAST)", "musculus (PWK)", "spretus (SPRET)"),
 					   name = "Strain",
-					   guide = guide_legend(override.aes = list(size = 2.5))) +
+					   guide = guide_legend(override.aes = list(size = 2.5))) + #legend
 	theme_tree2() +
-	coord_cartesian(ylim = c(0, 400)) +
+	coord_cartesian(ylim = c(0, 400)) + #population lambda
 	#expand_limits(y = 3700) +
 	facet_grid(. ~ "Tree") #adds the grey box label to the top of the plot
 
@@ -49,17 +50,19 @@ treeplot = treefile %>% ggtree() +
 msaplot = ggplot(fastafile, aes(x = position, y = label)) + 
 	geom_tile(aes(fill = nt)) +
 	scale_fill_manual(values = NT_colors,
-					  name = "Sequence") + 
-	theme_tree2() + coord_cartesian(ylim = c(0, 400)) +
+					  name = "Sequence") + #legend
+	theme_tree2() + 
+	coord_cartesian(ylim = c(0, 400)) + #population lambda
 	theme(axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
-		  axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()) + #removses axis labels and ticks
+		  axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()) + #removes axis labels and ticks
 	#expand_limits(y = 3700) +
 	facet_grid(. ~ "MSA")
 
 # Generate the Id1 matrix plot
-Id1plot = ggplot(Id1file, aes(x = V2, y = V1, fill = V2)) + 
-	geom_tile() +
-	theme_tree2() + coord_cartesian(ylim = c(0, 400)) +
+Id1plot = ggplot(Id1file, aes(x = V2, y = V1, fill = V2)) + #both x and fill are V2 on purpose, it was the only way to bypass the discrete vs continuous axis errors that I found
+	geom_tile() + 
+	theme_tree2() + 
+	coord_cartesian(ylim = c(0, 400)) + #population lambda
 	theme(axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
 		  axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(),
 		  legend.position = "none") + #removes legend for Id1 matrix
@@ -67,12 +70,12 @@ Id1plot = ggplot(Id1file, aes(x = V2, y = V1, fill = V2)) +
 	facet_grid(. ~ "Id1")
 
 # Combine the plots into a single figure
-comboplot = msaplot %>% insert_left(treeplot) %>% insert_right(Id1plot, width = 0.2) %>% 
+comboplot = msaplot %>% insert_left(treeplot) %>% insert_right(Id1plot, width = 0.2) %>% #combine tree, msa, and 1d1 into one plot
 	as.ggplot() + 
 	labs(title = "Mouse Subspecies: IAPLTR1 clustering and Mulitple Sequence Alignment",
-		 tag = expression(lambda)) +
-	theme(plot.title = element_text(size = 18, hjust = 0.15))
+		 tag = expression(lambda)) + #population lambda tag
+	theme(plot.title = element_text(size = 18, hjust = 0.15)) #shifting the title so it fits in the facetted plot better
 
-ggsave("LTR_phylogeny-all_subspecies-lambda.png", comboplot, device = "png", height = 8, width = 16)
+ggsave("LTR_phylogeny-all_subspecies-lambda.png", comboplot, device = "png", height = 8, width = 16) #saving
 
 #windows used for subpopulations: lambda = 0, 400 ; gamma = 400, 2600 ; beta = 2600, 3150 ; alpha = 3150 , 3650
